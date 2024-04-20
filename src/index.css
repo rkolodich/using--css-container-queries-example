@@ -1,0 +1,268 @@
+/* -- base -- */
+
+*,
+::before,
+::after {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+:root {
+	--radius-sm: 2px;
+	--radius-md: 4px;
+	--radius-lg: 8px;
+	--radius-xl: 12px;
+	--c-primary: #32BF84;
+	--c-on-primary: hsl(0, 0%, 95%);
+	--c-light-gray: #e0e0e0;
+	--c-gray: #d2d2d2;
+	--c-dark-gray: #c6c6c6;
+	--shadow: 0 0 10px 0 hsla(0, 0%, 20%, 0.125);
+	--ff-text: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-family: var(--ff-text);
+}
+
+/* -- components -- */
+
+.wrapper {
+	padding: 0 16px;
+	margin: 0 auto;
+	width: 100%;
+}
+
+@media (min-width: 480px) {
+	.wrapper {
+		width: 420px;
+	}
+}
+
+@media (min-width: 720px) {
+	.wrapper {
+		width: 640px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.wrapper {
+		width: 980px;
+	}
+}
+
+@media (min-width: 1400px) {
+	.wrapper {
+		width: 1400px;
+	}
+}
+
+.header {
+	container-type: inline-size;
+	container-name: header;
+	background-color: var(--c-primary);
+}
+
+.header__container {
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.header__logo {
+	font-size: 24px;
+	color: var(--c-on-primary);
+	line-height: 1em;
+}
+
+.header__nav {
+	display: none;
+	gap: 12px;
+}
+
+.header__nav-item {
+	color: var(--c-on-primary);
+	font-size: 20px;
+	line-height: 1em;
+}
+
+.header__hamburger {
+	width: 36px;
+	height: 36px;
+	border: 2px solid var(--c-on-primary);
+	border-radius: var(--radius-md);
+}
+
+@container header (min-width: 560px) {
+	.header__container {
+		height: 60px;
+	}
+
+	.header__logo {
+		font-size: 28px;
+	}
+
+	.header__hamburger {
+		display: none;
+	}
+
+	.header__nav {
+		display: flex;
+	}
+}
+
+.main {
+	padding: 60px 0;
+}
+
+.text {
+	--height: 20px;
+	--width: 60px;
+	--gap-y: 8px;
+	--gap-x: 12px;
+	--radius: var(--radius-md);
+	--c: var(--c-light-gray);
+	display: flex;
+	align-content: flex-start;
+	flex-wrap: wrap;
+	gap: var(--gap-y) var(--gap-x);
+}
+
+.text--title {
+	--height: 24px;
+	--width: 80px;
+	--gap-y: 12px;
+	--gap-x: 16px;
+	--c: var(--c-gray);
+}
+
+.text__item {
+	height: var(--height);
+	width: var(--width);
+	background-color: var(--c);
+	border-radius: var(--radius);
+}
+
+.text__item--sm {
+	width: calc(var(--width) * 0.5);
+}
+
+.text__item--lg {
+	width: calc(var(--width) * 1.25);
+}
+
+.grid-cards {
+	container-type: inline-size;
+	container-name: grid-cards;
+}
+
+.grid-cards__container {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 32px;
+}
+
+@container grid-cards (min-width: 640px) {
+	.grid-cards__container {
+		grid-template-columns: 1fr 1fr;
+		gap: 48px;
+	}
+}
+
+@container grid-cards (min-width: 980px) {
+	.grid-cards__container {
+		grid-template-columns: 1fr 1fr 1fr;
+		gap: 48px;
+	}
+
+	.grid-cards__container > :first-child {
+		grid-column-start: 0;
+		grid-column-end: 2;
+	}
+}
+
+.card {
+	container-type: inline-size;
+	container-name: card;
+}
+
+.card__container {
+	display: grid;
+	grid-auto-columns: 1fr;
+	grid-template-rows: repeat(3, auto);
+	grid-template-areas:
+		'img'
+		'title'
+		'text'
+	;
+	gap: 12px;
+}
+
+.card__text {
+	grid-area: title;
+}
+
+.card__text {
+	grid-area: text;
+}
+
+.card__img {
+	grid-area: img;
+	height: 160px;
+	border-radius: var(--radius-md);
+	background-color: var(--c-dark-gray);
+}
+
+@container card (min-width: 320px) {
+	.card__img {
+		height: 200px;
+	}
+}
+
+@container card (min-width: 460px) {
+	.card__container {
+		grid-auto-columns: auto 1fr;
+		grid-template-rows: min-content 1fr;
+		grid-template-areas:
+			'img title'
+			'img text'
+		;
+		gap: 16px 20px;
+	}
+
+	.card__img {
+		width: 200px;
+		height: 120px;
+	}
+}
+
+@container card (min-width: 680px) {
+	.card__container {
+		grid-auto-columns: auto 1fr;
+		grid-template-rows: min-content 1fr;
+		grid-template-areas:
+			'img title'
+			'img text'
+		;
+		gap: 20px 28px;
+	}
+
+	.card__img {
+		width: 300px;
+		height: 180px;
+	}
+
+	.card__title {
+		--height: 28px;
+		--width: 100px;
+		--gap-y: 16px;
+		--gap-x: 20px;
+	}
+
+	.card__text {
+		--height: 24px;
+		--width: 80px;
+		--gap-y: 12px;
+		--gap-x: 16px;
+	}
+}
+
